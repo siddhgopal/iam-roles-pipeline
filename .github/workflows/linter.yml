@@ -15,20 +15,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Fetch full history for VALIDATE_ALL_CODEBASE
+          fetch-depth: 0
 
       - name: Run Super-Linter
-        uses: super-linter/super-linter@v6  # Use latest version
+        uses: super-linter/super-linter@v6
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: "true"
-          VALIDATE_PYTHON: "true"
-          VALIDATE_TERRAFORM: "true"
-          VALIDATE_ANSIBLE: "true"
-          VALIDATE_RUBY: "true"
-          VALIDATE_YAML: "true"
-          VALIDATE_JSON: "true"
-          VALIDATE_MARKDOWN: "true"
-          VALIDATE_BASH: "true"
-          VALIDATE_DOCKERFILE_HADOLINT: "true"  # Corrected variable
