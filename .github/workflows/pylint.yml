@@ -5,25 +5,15 @@ on: [push]
 jobs:
   pylint:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    strategy:
-      matrix:
-        python-version: ["3.9"]  # Test only one Python version
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: ${{ matrix.python-version }}
-      - name: Cache pip packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ matrix.python-version }}
+          python-version: "3.10"
       - name: Install dependencies
         run: |
-          pip install --upgrade pip==23.3.2
-          pip install pylint
+          pip install boto3 pylint
       - name: Run Pylint
         run: |
           pylint --recursive=y --output-format=colorized --fail-under=7.0 .
